@@ -13,6 +13,7 @@ function index(req, res, next) {
 
   User.find({}, function(err, users) {
     if(err) next(err);
+    console.log(users);
     res.json(users);
   });
 }
