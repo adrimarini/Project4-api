@@ -12,11 +12,4 @@ router.route('/:id')
   .patch(addressesController.update)
   .delete(addressesController.destroy)
 
-
-
-
-
-
-
-
 module.exports = router;
