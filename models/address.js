@@ -15,7 +15,9 @@ var AddressSchema = new mongoose.Schema( {
   street: String,
   unit_num: Number,
   house_num: Number,
-  images: String
+  images: String,
+  lat: String,
+  lng: String
 
 });
 

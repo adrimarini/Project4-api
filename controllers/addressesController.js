@@ -21,12 +21,35 @@ function create(req, res, next) {
   console.log('This is a new address!');
 
   var newAddress =  new Address(req.body);
-  // var request = require('request');
-  newAddress.save(function(err, savedAddress) {
-    if (err) next(err);
+  var formattedAddress = newAddress.country + newAddress.street + ", " + newAddress.city
+  var request = require('request');
+  var getLatLng = request('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress, function (error, response, body){
+    if(!error && response.statusCode == 200) {
+      console.log("GOOGLE API RESPONSE")
+      var bodyP = JSON.parse(body)
+      var lat = bodyP.results[0].geometry.location.lat
+      var lng = bodyP.results[0].geometry.location.lng
+      console.log(lat)
+      console.log(lng)
+      newAddress.lat = lat
+      newAddress.lng = lng
 
-    res.json(savedAddress);
-  });
+      newAddress.save(function(err, savedAddress) {
+        if (err) next(err);
+
+        res.json(savedAddress);
+      });
+    }
+    // var latLngAddress = request('https://maps.googleapis.com/maps/api/geocode/json?latlng=' + lat + "," + lng + '&key=AIzaSyDL5Jzcocc4n65eI3mMcLbFsqtTqEs2c88')
+    // console.log("LATLNG ADDRESS BELOW")
+    // console.log(latLngAddress)
+
+  })
+
+
+
+
+
 }
 
 function show(req, res, next) {
