@@ -8,6 +8,7 @@ var database = require('./database');
 var addresses = [
   {
     country: "United States",
+    state: "California",
     city: "San Francisco",
     town: "Danville",
     street: "Wayfare Way",
@@ -16,6 +17,7 @@ var addresses = [
   },
   {
     country: "United States",
+    state: "California",
     city: "Santa Monica",
 
     street: "302 Arizona Ave",

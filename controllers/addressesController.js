@@ -21,6 +21,7 @@ function create(req, res, next) {
   console.log('This is a new address!');
 
   var newAddress =  new Address(req.body);
+  // var request = require('request');
   newAddress.save(function(err, savedAddress) {
     if (err) next(err);
 
@@ -45,11 +46,13 @@ function update(req, res, next) {
     if (err || !address) next(err);
 
     if(req.body.country) address.country = req.body.country;
+    if(req.body.state) address.state = req.body.state;
     if(req.body.city) address.city = req.body.city;
     if(req.body.town) address.town = req.body.town;
     if(req.body.street) address.street = req.body.street;
     if(req.body.unit_num) address.unit_num = req.body.unit_num;
     if(req.body.house_num) address.house_num = req.body.house_num;
+    if(req.body.images) address.images = req.body.images;
 
     res.json(address);
   });
