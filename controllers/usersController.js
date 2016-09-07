@@ -19,24 +19,42 @@ function index(req, res, next) {
 }
 
 function create(req, res, next) {
-  console.log('This is a new user!');
-
-  var newUser =  new User(req.body);
-  newUser.save(function(err, savedUser) {
-    if (err) next(err);
-
-    res.json(savedUser);
-  });
+  if (!req.body.password) {
+    return res.status(422).send('Missing required fields');
+  }
+  User
+    .create(req.body)
+    .then(function(user) {
+      res.json({
+        success: true,
+        message: 'Successfully created user.',
+        data: {
+          email: user.email,
+          id:    user._id
+        }
+      });
+    }).catch(function(err) {
+      if (err.message.match(/E11000/)) {
+        err.status = 409;
+      } else {
+        err.status = 422;
+      }
+      next(err);
+    });
 }
 
 function show(req, res, next) {
-  console.log('This is a single User');
+  if(req.params.id == req.decoded._id) {
+    console.log('This is a single User');
 
-  User.find({_id: req.params.id}, function(err, user) {
-    if (err || !user) next(err);
+    User.find({_id: req.params.id}, function(err, user) {
+      if (err || !user) next(err);
 
-    res.json(user);
-  });
+      res.json(user);
+    });
+  } else {
+    res.json({message: "Stop hacking"})
+  }
 }
 
 function update(req, res, next) {

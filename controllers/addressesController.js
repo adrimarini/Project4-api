@@ -26,6 +26,7 @@ function create(req, res, next) {
   var getLatLng = request('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress, function (error, response, body){
     if(!error && response.statusCode == 200) {
       console.log("GOOGLE API RESPONSE")
+      console.log(body)
       var bodyP = JSON.parse(body)
       var lat = bodyP.results[0].geometry.location.lat
       var lng = bodyP.results[0].geometry.location.lng
