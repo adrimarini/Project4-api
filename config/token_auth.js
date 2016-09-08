@@ -48,6 +48,8 @@ var jwt = require('jsonwebtoken');
    User
      .findOne({email: req.body.email}).exec()
      .then(function(user) {
+       console.log("TRYING TO LOG IN:");
+       console.log(user)
        if (!user || !user.verifyPasswordSync(req.body.password)) {
          var message = 'User not found or password incorrect.';
          return res.status(403).json(message);
