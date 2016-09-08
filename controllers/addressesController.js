@@ -11,16 +11,18 @@ module.exports = {
 function index(req, res, next) {
   console.log('I hear you!');
 
-  Address.find({}, function(err, addresses) {
-    if(err) next(err);
-    res.json(addresses);
-  });
+  Address
+    .find({})
+    .populate('host')
+    .exec(function(err, addresses) {
+      if(err) next(err);
+      res.json(addresses);
+    });
 }
 
 function create(req, res, next) {
-  console.log('This is a new address!');
-
   var newAddress =  new Address(req.body);
+  newAddress.host = req.decoded._id;
   var formattedAddress = newAddress.country + newAddress.street + ", " + newAddress.city
   var request = require('request');
   var getLatLng = request('https://maps.googleapis.com/maps/api/geocode/json?address=' + formattedAddress, function (error, response, body){

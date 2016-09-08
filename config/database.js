@@ -11,7 +11,7 @@ if (!process.env.MONGODB_URI) {
   process.exit(0);
   });
 }
-
+console.log('connection to:', dbUri)
 mongoose.connect(dbUri);
 
 module.exports = mongoose;

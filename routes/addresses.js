@@ -3,9 +3,12 @@ var router = express.Router();
 
 var addressesController = require('../controllers/addressesController');
 
+// Require token authentication.
+var token = require('../config/token_auth');
+
 router.route('/')
   .get(addressesController.index)
-  .post(addressesController.create)
+  .post(token.authenticate, addressesController.create)
 
 router.route('/:id')
   .get(addressesController.show)
