@@ -9,7 +9,6 @@ var UserSchema = new mongoose.Schema( {
   phone: String,
   email: String,
   image: String
-
 });
 
 // add bcrypt hashing to model (works on a password field)!

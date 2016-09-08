@@ -12,16 +12,20 @@ var addresses = [
     city: "San Francisco",
     town: "Danville",
     street: "Wayfare Way",
-
     house_num: "17"
   },
   {
     country: "United States",
     state: "California",
     city: "Santa Monica",
-
     street: "302 Arizona Ave",
-    unit_num: "14"
+    unit_num: "1"
+  },
+  {
+    country: "United States",
+    state: "California",
+    city: "Santa Monica",
+    street: "220 Broadway"
   }
 ]
 

@@ -4,10 +4,10 @@ var mongoose = require( 'mongoose' );
 //Create a schema
 
 var AddressSchema = new mongoose.Schema( {
-  // host: {
-  //   type : mongoose.Schema.Types.ObjectId,
-  //   ref : 'User'
-  // },
+  host: {
+    type : mongoose.Schema.Types.ObjectId,
+    ref : 'User'
+  },
   country: {type: String, required: true},
   state: String,
   city: {type: String, required: true},
